@@ -99,7 +99,6 @@ $arrConfig['game']['battle_time_to'] = '17:00';
 $arrConfig['game']['battle_days'] = 'xxxxx--'; // x = Battle day, - = No Battle day
 ```
 
-
 ## Authors & Credits
 
 The Gamify project was developed in 2018 as a schoolar project. The goal behind the Gamify project was to realize a relational database driven application. So we decided to develop something usefull that is still tricky to manage.

@@ -18,7 +18,6 @@ var AjaxHelper = function() {
       data: objData,
       success: function(strData) {
         if(typeof(fncCallback) == 'function') {
-          console.log(strData);
           fncCallback(jQuery.parseJSON(strData));
         }
       }

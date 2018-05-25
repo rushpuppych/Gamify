@@ -218,6 +218,15 @@ var Controller = function() {
   };
 
   this.getAddQuestModalHtml = function() {
+    // Remove Existing Fields
+    $('#quest_title').remove();
+    $('#quest_day').remove();
+    $('#quest_hour').remove();
+    $('#quest_minute').remove();
+    $('#quest_priority').remove();
+    $('.wysiwyg').remove();
+
+    // Create New HTML Content
     var strHtml = '';
     strHtml += '<form>';
     strHtml += '  <div class="form-group">';
