@@ -99,7 +99,8 @@
             </p>
             <h5>Developement</h5>
             <p>
-              GitHub Repo
+              <b>GitHub Repo:</b><br>
+              https://github.com/rushpuppych/Gamify.git
             </p>
           </div>
         </div>
