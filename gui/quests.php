@@ -62,7 +62,10 @@ if(is_array(getConfig('game')['create_quests'])) {
             <?php if($boolShowAddButton) { ?>
             <button id="quest_create_button" class="btn btn-primary float-right">Create Quest</button>
             <?php } ?>
-            <button id="quest_scan_button" class="btn btn-success float-right" style="margin-right: 10px;">Scan Quest Code</button>
+            <div class="float-right" style="width: 200px; margin-right: 10px;">
+              <input id="scann_code_input" type="file" style="cursor: pointer; width: 200px; height: 39px; position: absolute; opacity: 0;">
+              <button id="quest_scan_button" class="btn btn-success btn-block">Scan Quest Code</button>
+            <div>
           </div>
         </div>
       </div>

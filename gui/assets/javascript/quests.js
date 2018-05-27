@@ -18,8 +18,8 @@ var Controller = function() {
 
   this.eventManager = function() {
     $('body').on('click', '#quest_create_button', function(e){$this.showAddQuestModal(e);});
-    $('body').on('click', '#quest_scan_button', function(e){$this.questScan(e);});
     $('body').on('click', '.quest_record', function(e){$this.showQuestDetail(e);});
+    $('body').on('change', '#scann_code_input', function(e){_ajax.fileUploadHandler(e.target, $this.uploadQrCode, ['image.*']);});
   };
 
   this.loadQuests = function() {
@@ -55,10 +55,6 @@ var Controller = function() {
     });
   };
 
-  this.questScan = function() {
-    alert('SCANNED');
-  };
-
   this.showAddQuestModal = function() {
     var strHtmlModal = $this.getAddQuestModalHtml();
     _ui.showModal('Add Quest', strHtmlModal, [{text: 'Add Quest', callback: $this.addQuest}, {text: 'Close'}], function(elModal) {
@@ -88,8 +84,8 @@ var Controller = function() {
             // Create Quest Code
             new QRCode($('#qrcode')[0], {
               text: objResponse.quest_code,
-              width: 128,
-              height: 128,
+              width: 256,
+              height: 256,
               colorDark : "#000000",
               colorLight : "#ffffff",
               correctLevel : QRCode.CorrectLevel.H
@@ -125,8 +121,8 @@ var Controller = function() {
       // Create Quest Code
       new QRCode($('#qrcode')[0], {
         text: strQuestcode,
-        width: 128,
-        height: 128,
+        width: 256,
+        height: 256,
         colorDark : "#000000",
         colorLight : "#ffffff",
         correctLevel : QRCode.CorrectLevel.H
@@ -204,7 +200,7 @@ var Controller = function() {
               // Show Error message
               _ui.showModal('Error', objResponse.msg, [{text: 'Close'}]);
             } else {
-              _ui.showModal('quest Delegate', 'Your Quest is now delegated.', [{text: 'Close'}]);
+              _ui.showModal('Quest Delegate', 'Your Quest is now delegated.', [{text: 'Close'}]);
               $this.loadQuests();
             }
           });
@@ -213,6 +209,19 @@ var Controller = function() {
         // Show Delegate window
         var strHtml = $this.getDelegateHtml(objResponse.fractions);
         _ui.showModal('Delegate Quest', strHtml, [{text: 'Delegate', color: 'success', callback: fncCallback},{text: 'Close'}]);
+      }
+    });
+  };
+
+  this.uploadQrCode = function(objUploadFile) {
+    // Send QR Code Request
+    _ajax.sendPost('quest_code_decoding', objUploadFile, function(objResponse) {
+      if(!objResponse.status) {
+        // Show Error message
+        _ui.showModal('Error', objResponse.msg, [{text: 'Close'}]);
+      } else {
+        _ui.showModal('New Quest', 'You got a new Quest.', [{text: 'Close'}]);
+        $this.loadQuests();
       }
     });
   };

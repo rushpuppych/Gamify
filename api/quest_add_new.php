@@ -32,7 +32,7 @@ $numTimeStamp += ($_POST['time_minutes'] * 60);
 // Save Quest
 $objQuestModel = new QuestModel();
 $numQuestCode = $objQuestModel->createQuest($arrQuest['title'], $numTimeStamp, $arrQuest['prio'], $_POST['description'], $arrQuest['exp'], base64_encode(json_encode($arrQuest['items'])));
-$strQuestCode = md5($numQuestCode . getConfig('security')['salt']);
+$strQuestCode = '{"type":"quest", "id": "' . $numQuestCode . '", "hash": "' . md5($numQuestCode . getConfig('security')['salt']) . '"}';
 
 // Create Log Entry
 $objActivityLogModel = new ActivityLogModel();

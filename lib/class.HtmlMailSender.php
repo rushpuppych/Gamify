@@ -2,7 +2,6 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-
 include_once '../vendor/PHPMailer/src/Exception.php';
 include_once '../vendor/PHPMailer/src/PHPMailer.php';
 include_once '../vendor/PHPMailer/src/SMTP.php';
