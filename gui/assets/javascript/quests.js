@@ -4,6 +4,7 @@ var Controller = function() {
   var _private = {};
   var _ajax = new AjaxHelper();
   var _ui = new UiHelper();
+  var _string = new StringHelper();
 
   // Helper System Variables
   this.options = {
@@ -103,7 +104,7 @@ var Controller = function() {
     var strFinish = $(e.target).closest('tr').data('finish');
     var strTitle = $(e.target).closest('tr').data('title');
     var strDescription = unescape($(e.target).closest('tr').data('description')) + '<hr><center><b>Quest Code</b><br><span id="qrcode"></span></center>';
-    var strQuestcode = $(e.target).closest('tr').data('quest-code');
+    var strQuestcode = _string.base64decode($(e.target).closest('tr').data('quest-code'));
 
     // Generate Buttons
     var objButtons = [{text: 'Close'}];
@@ -215,7 +216,7 @@ var Controller = function() {
 
   this.uploadQrCode = function(objUploadFile) {
     // Send QR Code Request
-    _ajax.sendPost('quest_code_decoding', objUploadFile, function(objResponse) {
+    _ajax.sendPostFromCard($('body'), 'quest_code_decoding', objUploadFile, function(objResponse) {
       if(!objResponse.status) {
         // Show Error message
         _ui.showModal('Error', objResponse.msg, [{text: 'Close'}]);

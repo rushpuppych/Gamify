@@ -16,7 +16,8 @@ $arrResult = $objQuestModel->loadQuestsByPlayerId($_SESSION['user']['character']
 
 // Add QR codes
 foreach($arrResult as $numIndex => $arrRecord) {
-    $arrResult[$numIndex]['quest_code'] = md5($arrRecord['id'] . getConfig('security')['salt']);
+  $strQuestCode = '{"type":"quest", "id": "' . $arrRecord['id'] . '", "hash": "' . md5($arrRecord['id'] . getConfig('security')['salt']) . '"}';
+  $arrResult[$numIndex]['quest_code'] = base64_encode($strQuestCode);
 }
 
 // Send Response
